@@ -1,5 +1,3 @@
-import javax.swing.text.html.HTMLDocument.HTMLReader;
-
 /*
  * @lc app=leetcode.cn id=67 lang=java
  *

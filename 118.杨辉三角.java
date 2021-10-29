@@ -18,7 +18,7 @@ class Solution {
         for (int i = 1; i < numRows; i++) {
             List<Integer> temp = new LinkedList<>();
             temp.add(1);
-            for (int j = 0; j < pre.size() - 1; i++) {
+            for (int j = 0; j < pre.size() - 1; j++) {
                 temp.add(pre.get(j) + pre.get(j + 1));
             }
             temp.add(1);

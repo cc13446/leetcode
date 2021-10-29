@@ -1,6 +1,3 @@
-import java.util.stream.IntStream;
-import java.util.stream.LongStream;
-
 /*
  * @lc app=leetcode.cn id=69 lang=java
  *

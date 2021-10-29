@@ -29,10 +29,14 @@ class Solution {
         List<Integer> res = new LinkedList<>();
         Stack<TreeNode> s = new Stack<>();
         s.push(root);
-        while(root.left != null) s.push(root.left);
         while(!s.isEmpty()){
-
+            TreeNode t = s.pop();
+            if (t == null) continue;
+            res.add(t.val);
+            if (t.right != null) s.push(t.right);
+            if (t.left != null) s.push(t.left);
         }
+        return res;
     }
 }
 // @lc code=end

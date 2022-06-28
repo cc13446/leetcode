@@ -17,10 +17,10 @@ class Solution {
     }
 
     private int select(int[] nums, int left, int right, int k) {
-            int index = partition(nums, left, right);
-            if (k == index) return nums[k];
-            else if (k > index) return select(nums, index + 1, right, k);
-            else return select(nums, left, index - 1, k);
+        int index = partition(nums, left, right);
+        if (k == index) return nums[k];
+        else if (k > index) return select(nums, index + 1, right, k);
+        else return select(nums, left, index - 1, k);
     }
 
     private int partition(int[] nums, int left, int right){

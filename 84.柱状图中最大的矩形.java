@@ -1,5 +1,6 @@
-import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
+import java.util.LinkedList;
 
 /*
  * @lc app=leetcode.cn id=84 lang=java
@@ -10,33 +11,31 @@ import java.util.Deque;
 // @lc code=start
 class Solution {
     public int largestRectangleArea(int[] heights) {
-        int n = heights.length;
-        int[] left = new int[n];
-        int[] right = new int[n];
-        // 单调栈 求出左边界
-        Deque<Integer> mono_stack = new ArrayDeque<Integer>();
-        for (int i = 0; i < n; ++i) {
-            while (!mono_stack.isEmpty() && heights[mono_stack.peek()] >= heights[i]) {
-                mono_stack.pop();
+        int[] left = new int[heights.length];
+        int[] right = new int[heights.length];
+        Arrays.fill(right, heights.length);
+
+
+        Deque<Integer> stack = new LinkedList<>();
+        // 利用单调栈 求出每个元素左边最近的比其小的元素
+        for (int i = 0; i < heights.length; i++)  {
+            // 栈中单调递减的存着一个下表序列，弹出比当前元素大的所有元素
+            while(!stack.isEmpty() && heights[stack.peek()] >= heights[i]) {
+                right[stack.pop()] = i;
             }
-            left[i] = (mono_stack.isEmpty() ? -1 : mono_stack.peek());
-            mono_stack.push(i);
+            // 找到了当前元素左边最近的比其小的元素
+            left[i] = stack.isEmpty() ? -1 : stack.peek();
+            // 当前元素也放到单调栈里面
+            stack.push(i);
         }
-        // 单调栈 求出右边界
-        mono_stack.clear();
-        for (int i = n - 1; i >= 0; --i) {
-            while (!mono_stack.isEmpty() && heights[mono_stack.peek()] >= heights[i]) {
-                mono_stack.pop();
-            }
-            right[i] = (mono_stack.isEmpty() ? n : mono_stack.peek());
-            mono_stack.push(i);
+
+        int max = 0;
+        // 计算面积
+        for (int i = 0; i < heights.length; i++) {
+            int temp = (right[i] - left[i] - 1) * heights[i];
+            max = Math.max(temp, max);
         }
-        
-        int ans = 0;
-        for (int i = 0; i < n; ++i) {
-            ans = Math.max(ans, (right[i] - left[i] - 1) * heights[i]);
-        }
-        return ans;
+        return max;
     }
 }
 // @lc code=end

@@ -1,6 +1,3 @@
-import java.util.HashSet;
-import java.util.Set;
-
 class ListNode {
     int val;
     ListNode next;

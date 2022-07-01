@@ -1,6 +1,4 @@
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 class ListNode {
@@ -31,13 +29,27 @@ class ListNode {
  */
 class Solution {
     public ListNode detectCycle(ListNode head) {
-        Set<ListNode> set = new HashSet<>();
-        for (ListNode l = head; l != null; l = l.next) {
-            if (!set.add(l)) {
-                return l;
-            } 
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+
+            if (slow == fast) {
+                ListNode index1 = head;
+                ListNode index2 = slow;
+
+                while(index1 != index2) {
+                    index1 = index1.next;
+                    index2 = index2.next;
+                }
+
+                return index1;
+            }
         }
-        return null;
+
+        return null; 
     }
 }
 // @lc code=end

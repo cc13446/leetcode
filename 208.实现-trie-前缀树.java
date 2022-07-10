@@ -8,7 +8,7 @@
 class Trie {
 
     static class TreeNode {
-        boolean isWord;
+        String val = null;
         TreeNode[] children = new TreeNode[26];
     }
 
@@ -21,40 +21,35 @@ class Trie {
     public void insert(String word) {
         TreeNode t = root;
 
-        for (int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
+        for (char c : word.toCharArray()) {
             if (t.children[c - 'a'] == null) {
                 t.children[c - 'a'] = new TreeNode();
             }
             t = t.children[c - 'a'];
         }
-        t.isWord = true;
+        t.val = word;
     }
     
     public boolean search(String word) {
         TreeNode t = root;
 
-        for (int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
+        for (char c : word.toCharArray()) {
             t = t.children[c - 'a'];
             if (t == null) {
                 return false;
             }
             
         }
-        return t.isWord;
+        return t.val != null;
     }
     
     public boolean startsWith(String prefix) {
         TreeNode t = root;
-
-        for (int i = 0; i < prefix.length(); i++) {
-            char c = prefix.charAt(i);
+        for (char c : prefix.toCharArray()) {
             t = t.children[c - 'a'];
             if (t == null) {
                 return false;
             }
-            
         }
         return true;
     }

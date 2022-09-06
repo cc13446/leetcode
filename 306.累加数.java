@@ -8,12 +8,22 @@
 class Solution {
     public boolean isAdditiveNumber(String num) {
         if (num.length() < 3) return false;
-        int sum = 0;
+        int first = 0;
         for (int i = 0; i < num.length(); i++) {
-            sum *= 10;
-            sum += num.charAt(i) - '0';
-            if (dfs(i + 1, sum, sum, num, 0)) return true;
+            first *= 10;
+            first += num.charAt(i) - '0';
+            int sum = 0;
+            for (int j = i + 1; j < num.length(); j++) {
+                sum *= 10;
+                sum += num.charAt(j) - '0';
+                System.out.println("f"+first);
+                System.out.println("s"+sum);
+                if (dfs(j + 1, sum, sum + first, num, 2)) return true;
+                if (num.charAt(i + 1) == '0') break;
+            }
+            if (num.charAt(0) == '0') break;
         }
+       
         return false;
     }
 
@@ -25,6 +35,7 @@ class Solution {
             s += num.charAt(i) - '0';
             System.out.println(s);
             if (s == expectSum && dfs(i + 1, s, sum + s, num, deep + 1)) return true;
+            if (num.charAt(index) == '0') break;
         }
         return false;
     }

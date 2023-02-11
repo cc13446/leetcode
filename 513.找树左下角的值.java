@@ -1,6 +1,3 @@
-import java.util.Deque;
-import java.util.LinkedList;
-
 /*
  * @lc app=leetcode.cn id=513 lang=java
  *

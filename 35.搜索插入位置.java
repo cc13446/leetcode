@@ -7,23 +7,18 @@
 // @lc code=start
 class Solution {
     public int searchInsert(int[] nums, int target) {
-        return helper(nums, 0, nums.length - 1, target);
-    }
-
-    public int helper(int[] nums, int left, int right, int target) {
-        if (left >= right) {
-            if (target > nums[left]) return left + 1;
-            else if (target < nums[left]) return left;
-            else return left;
+        int left = 0, right = nums.length - 1;
+        while(left <= right) {
+            int mid = (left + right) / 2;
+            if(nums[mid] == target) {
+                return mid;
+            } else if(nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
         }
-        int mid = (left + right) / 2;
-        if (nums[mid] > target) {
-            return helper(nums, left, mid - 1, target);
-        } else if (nums[mid] < target) {
-            return helper(nums, mid + 1, right, target);
-        } else {
-            return mid;
-        }
+        return left;
     }
 }
 // @lc code=end

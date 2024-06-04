@@ -31,11 +31,10 @@ class Solution {
         switch (op) {
             case ' ':
                 temp = temp - mul;
-                if (lastV != 0) {
-                    mul = mul / lastV;
-                }
                 if (mul == 0 && lastV == 0) {
                     mul = 1;
+                } else {
+                    mul = mul / lastV;
                 }
                 lastV = lastV * 10 + (lastV >= 0 ? v : -v);
                 mul = mul * lastV;
